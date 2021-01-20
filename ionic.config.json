@@ -1,0 +1,7 @@
+{
+  "name": "MoBible",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
