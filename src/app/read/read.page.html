@@ -1,0 +1,50 @@
+<ion-menu side="end" content-id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Opções</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-range min="1" max="3" step="1" [value]="tam" snaps color="danger" (ionChange)="fontSize($event)">
+          <ion-icon slot="start" size="small" color="danger" name="information"></ion-icon>
+          <ion-icon slot="end" color="danger" name="information"></ion-icon>
+        </ion-range>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-header id="main-content">
+  <ion-toolbar>
+    <ion-buttons slot="primary">
+      <ion-buttom>
+        <ion-menu-button>
+          <ion-icon name="options-outline"></ion-icon>
+        </ion-menu-button>
+      </ion-buttom>
+    </ion-buttons>
+    <ion-select interface="popover" [placeholder]="version" [(ngModel)]="version" (ionChange)="loadText(number,name,$event.target.value.substr(0,3))">
+      <div *ngFor="let version of versions">
+        <ion-select-option *ngIf="version.version == 'acf'">{{version.version.toLocaleUpperCase()}} - Almeida Corrigida Fiel</ion-select-option>
+        <ion-select-option *ngIf="version.version == 'nvi'">{{version.version.toLocaleUpperCase()}} - Nova Versão Internacional</ion-select-option>
+      </div>
+    </ion-select>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="false">
+  <div class="text" *ngFor="let verse of verses">
+    <ion-text color="primary">{{verse.number}}&nbsp;</ion-text>
+    <ion-text [ngClass]="verseClass()">{{verse.text}}</ion-text>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-select interface="popover" [placeholder]="name" [(ngModel)]="name" (ionChange)="loadText(number,$event.target.value,version)">
+      <ion-select-option *ngFor="let book of books">{{book.name}}</ion-select-option>
+    </ion-select>
+    <ion-select interface="popover" [placeholder]="number" [(ngModel)]="number" (ionChange)="loadText($event.target.value,name,version)">
+      <ion-select-option *ngFor="let num of numChapter">{{num}}</ion-select-option>
+    </ion-select>
+  </ion-toolbar>
+</ion-footer>

@@ -1,7 +1,8 @@
 {
-  "name": "MoBible",
+  "name": "AppAprov",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }
