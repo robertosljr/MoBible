@@ -17,6 +17,12 @@
 </ion-menu>
 <ion-header id="main-content">
   <ion-toolbar>
+    <ion-chip  slot="start" class="ion-margin-start">
+      <ion-avatar>
+         <img src="../../assets/person.svg">
+      </ion-avatar>
+      <ion-label>{{nome}}</ion-label>
+   </ion-chip>
     <ion-buttons slot="primary">
       <ion-buttom>
         <ion-menu-button>
@@ -24,22 +30,30 @@
         </ion-menu-button>
       </ion-buttom>
     </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [scrollEvents]="true" [scroll-y]=true>
+  <div class="text" *ngFor="let verse of verses">
+    <ion-text color="primary">{{verse.number}}&nbsp;</ion-text>
+    <ion-text [ngClass]="verseClass()">{{verse.text}}</ion-text>
+  </div>
+  <ion-item-divider>
+    <ion-button slot="start" class="btn" (click)="page(false)">
+      <ion-icon name="caret-back-outline"></ion-icon>
+    </ion-button>
+    <ion-button slot="end" class="btn" (click)="page(true)">
+      <ion-icon name="caret-forward-outline"></ion-icon>
+    </ion-button>
+  </ion-item-divider>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
     <ion-select interface="popover" [placeholder]="version" [(ngModel)]="version" (ionChange)="loadText(number,name,$event.target.value.substr(0,3))">
       <div *ngFor="let version of versions">
         <ion-select-option *ngIf="version.version == 'acf'">{{version.version.toLocaleUpperCase()}} - Almeida Corrigida Fiel</ion-select-option>
         <ion-select-option *ngIf="version.version == 'nvi'">{{version.version.toLocaleUpperCase()}} - Nova Versão Internacional</ion-select-option>
       </div>
     </ion-select>
-  </ion-toolbar>
-</ion-header>
-<ion-content [fullscreen]="false">
-  <div class="text" *ngFor="let verse of verses">
-    <ion-text color="primary">{{verse.number}}&nbsp;</ion-text>
-    <ion-text [ngClass]="verseClass()">{{verse.text}}</ion-text>
-  </div>
-</ion-content>
-<ion-footer>
-  <ion-toolbar>
     <ion-select interface="popover" [placeholder]="name" [(ngModel)]="name" (ionChange)="loadText(number,$event.target.value,version)">
       <ion-select-option *ngFor="let book of books">{{book.name}}</ion-select-option>
     </ion-select>

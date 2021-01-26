@@ -16,6 +16,7 @@ export class AppComponent {
   book;
   books;
   version;
+  token;
 
   constructor(
     private platform: Platform,

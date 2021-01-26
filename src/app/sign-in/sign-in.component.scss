@@ -1,0 +1,36 @@
+ion-content{
+    --background: url('../../assets/signin.jpeg');
+}
+ion-title{
+    font-weight: bold;
+    font-size:xx-large;
+}
+div{
+    margin-top: 35%;
+}
+div > ion-item > ion-input{
+    opacity: 1;
+}
+div > ion-item {
+    width: auto;
+    text-align: center;
+    margin: 3rem;
+    color: white;
+    --background: black;
+    opacity: 0.5;
+    font-weight: bold;
+}
+div, div > a, ion-text{
+    color:white;
+    text-align: center;
+    width: auto;
+}
+a,ion-button{
+    font-weight: bold;
+}
+ion-button{
+    --background: transparent;
+    width: 100%;
+    font-size: large;
+    --box-shadow: none;
+}

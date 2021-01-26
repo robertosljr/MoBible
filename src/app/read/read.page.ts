@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
 import { AppComponent } from '../app.component';
 
 @Component({
-  selector: 'app-read',
   templateUrl: 'read.page.html',
   styleUrls: ['read.page.scss'],
 })
@@ -21,10 +21,17 @@ export class ReadPage {
   versions;
   showVersions;
   number;
+  token;
+  nome;
 
-  constructor(private app:AppComponent){}
+  destaque = false;
+
+  constructor(private app:AppComponent,
+              private popOver: PopoverController){}
 
   async ionViewWillEnter(){
+    this.token = JSON.parse(localStorage.getItem('usuario')).token;
+    this.nome = JSON.parse(localStorage.getItem('usuario')).name;
     this.numChapter = new Array();
     this.showChap = false;
     this.tam = this.tam == undefined ? 2 : this.tam;
@@ -46,7 +53,7 @@ export class ReadPage {
     }
     let url = `https://www.abibliadigital.com.br/api/verses/${version.toLocaleLowerCase()}/${book}/${number}`;
     let url2 = `https://www.abibliadigital.com.br/api/books/${book}`;
-    let auth = { headers: {Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IldlZCBKYW4gMjAgMjAyMSAyMTozMTowNSBHTVQrMDAwMC5yb2JzbGpAZ21haWwuY29tIiwiaWF0IjoxNjExMTc4MjY1fQ.5zfqqzFaHAoS-jpWyjGb0k8EsmpBR75Wb_sZ_PMfM2A'}};
+    let auth = { headers: {Authorization: `Bearer ${this.token}`}};
     let response = await fetch(url2,auth);
     Promise.resolve(response.json())
       .then((res:any) => {
@@ -62,10 +69,15 @@ export class ReadPage {
       });
   }
 
+  getContent(){
+    return document.querySelector('ion-content');
+  }
+
   async page(next: boolean){
     if (next){
       this.number = +this.lastChapter+1;
       this.loadText(this.number);
+      this.getContent().scrollToTop(500);
     } else {
       if (this.lastChapter > 1){
         this.number = +this.lastChapter-1;
@@ -117,7 +129,7 @@ export class ReadPage {
 
   async loadBooks(){
     let url = 'https://www.abibliadigital.com.br/api/books';
-    let auth = { headers: {Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IldlZCBKYW4gMjAgMjAyMSAyMTozMTowNSBHTVQrMDAwMC5yb2JzbGpAZ21haWwuY29tIiwiaWF0IjoxNjExMTc4MjY1fQ.5zfqqzFaHAoS-jpWyjGb0k8EsmpBR75Wb_sZ_PMfM2A'}};
+    let auth = { headers: {Authorization: `Bearer ${this.token}`}};
     let response = await fetch(url,auth);
     Promise.resolve(response.json())
       .then((res:any) => {
@@ -130,7 +142,7 @@ export class ReadPage {
 
   async loadVersions(){
     let url = 'https://www.abibliadigital.com.br/api/versions';
-    let auth = { headers: {Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IldlZCBKYW4gMjAgMjAyMSAyMTozMTowNSBHTVQrMDAwMC5yb2JzbGpAZ21haWwuY29tIiwiaWF0IjoxNjExMTc4MjY1fQ.5zfqqzFaHAoS-jpWyjGb0k8EsmpBR75Wb_sZ_PMfM2A'}};
+    let auth = { headers: {Authorization: `Bearer ${this.token}`}};
     let response = await fetch(url,auth);
     Promise.resolve(response.json())
       .then((res:any) => {
@@ -154,6 +166,11 @@ export class ReadPage {
 
   selectVersion(version){
     this.version = version.toLocaleUpperCase();
+  }
+
+  destaqueVerse(verse){
+    this.destaque = true;
+    console.log(verse);
   }
 
 }

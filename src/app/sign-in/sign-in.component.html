@@ -1,0 +1,15 @@
+<ion-content>
+    <div>
+        <ion-title>MoBible</ion-title>
+        <ion-item>
+            <ion-input placeholder="E-mail" type="email" #email></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input placeholder="Senha" type="password" #senha></ion-input>
+        </ion-item>
+        <ion-button expand="block" (click)="entrar(email,senha)">Entrar</ion-button><br>
+        <ion-text>Não tem conta? </ion-text>
+        <a [routerLink]="['/signup']">Cadastre-se</a><br><br>
+        <ion-text>✞ = ♡</ion-text>
+    </div>
+</ion-content>

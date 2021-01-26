@@ -12,12 +12,16 @@ ion-icon{
 ion-select{
     display: flex;
     float: left;
-    width: 50%;
+    width: 33%;
     justify-content: center;
     align-items: center;
 }
 ion-select-option{
     text-decoration: none;
+}
+ion-item-divider{
+    margin-bottom: 10px;
+    border: none;
 }
 .buttom1{
     padding-left: 10px;
@@ -36,6 +40,13 @@ ion-select-option{
     margin: auto;
     justify-content: center;
 }
-a{
-    text-decoration: none;
+.btn{
+    --box-shadow: none;
+    --background: none;
+}
+.btn > ion-icon{
+    color: black;
+    --background: transparent;
+    width: 5rem;
+    height: 2rem;
 }

@@ -1,0 +1,16 @@
+<ion-content>
+    <div>
+        <ion-title>MoBible</ion-title>
+        <ion-item>
+            <ion-input placeholder="Nome Completo" type="text" #nome></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input placeholder="E-mail" type="email" #email></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input placeholder="Senha" type="password" #senha></ion-input>
+        </ion-item>
+        <ion-button expand="block" (click)="cadastrar(nome,email,senha)">Cadastrar</ion-button><br>
+        <ion-text>✞ = ♡</ion-text>
+    </div>
+</ion-content>
