@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { AppComponent } from '../app.component';
 
 @Component({
@@ -27,7 +27,7 @@ export class ReadPage {
   destaque = false;
 
   constructor(private app:AppComponent,
-              private popOver: PopoverController){}
+              private route: Router){}
 
   async ionViewWillEnter(){
     this.token = JSON.parse(localStorage.getItem('usuario')).token;
@@ -171,6 +171,11 @@ export class ReadPage {
   destaqueVerse(verse){
     this.destaque = true;
     console.log(verse);
+  }
+
+  exit(){
+    localStorage.clear();
+    this.route.navigate(['signin']);
   }
 
 }

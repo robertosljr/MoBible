@@ -19,20 +19,22 @@
   <ion-toolbar>
     <ion-chip  slot="start" class="ion-margin-start">
       <ion-avatar>
-         <img src="../../assets/person.svg">
+          <img src="../../assets/person.svg">
       </ion-avatar>
-      <ion-label>{{nome}}</ion-label>
+      <ion-select interface="popover" [placeholder]="nome" mode="ios" (ionChange)="exit()">
+        <ion-select-option value="sair">Sair</ion-select-option>
+      </ion-select>
    </ion-chip>
     <ion-buttons slot="primary">
-      <ion-buttom>
+      <ion-button>
         <ion-menu-button>
           <ion-icon name="options-outline"></ion-icon>
         </ion-menu-button>
-      </ion-buttom>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content [scrollEvents]="true" [scroll-y]=true>
+<ion-content [scrollEvents]="true">
   <div class="text" *ngFor="let verse of verses">
     <ion-text color="primary">{{verse.number}}&nbsp;</ion-text>
     <ion-text [ngClass]="verseClass()">{{verse.text}}</ion-text>
@@ -48,16 +50,16 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <ion-select interface="popover" [placeholder]="version" [(ngModel)]="version" (ionChange)="loadText(number,name,$event.target.value.substr(0,3))">
+    <ion-select mode="ios" interface="popover" [placeholder]="version" [(ngModel)]="version" (ionChange)="loadText(number,name,$event.target.value.substr(0,3))">
       <div *ngFor="let version of versions">
         <ion-select-option *ngIf="version.version == 'acf'">{{version.version.toLocaleUpperCase()}} - Almeida Corrigida Fiel</ion-select-option>
         <ion-select-option *ngIf="version.version == 'nvi'">{{version.version.toLocaleUpperCase()}} - Nova Versão Internacional</ion-select-option>
       </div>
     </ion-select>
-    <ion-select interface="popover" [placeholder]="name" [(ngModel)]="name" (ionChange)="loadText(number,$event.target.value,version)">
+    <ion-select mode="ios" interface="popover" [placeholder]="name" [(ngModel)]="name" (ionChange)="loadText(number,$event.target.value,version)">
       <ion-select-option *ngFor="let book of books">{{book.name}}</ion-select-option>
     </ion-select>
-    <ion-select interface="popover" [placeholder]="number" [(ngModel)]="number" (ionChange)="loadText($event.target.value,name,version)">
+    <ion-select mode="ios" interface="popover" [placeholder]="number" [(ngModel)]="number" (ionChange)="loadText($event.target.value,name,version)">
       <ion-select-option *ngFor="let num of numChapter">{{num}}</ion-select-option>
     </ion-select>
   </ion-toolbar>

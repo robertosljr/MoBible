@@ -1,3 +1,7 @@
+:root {
+    --ion-safe-area-top: 20px;
+    --ion-safe-area-bottom: 22px;
+  }
 .text{
     text-align: center;
     color: black;
@@ -17,7 +21,7 @@ ion-select{
     align-items: center;
 }
 ion-select-option{
-    text-decoration: none;
+    
 }
 ion-item-divider{
     margin-bottom: 10px;
@@ -49,4 +53,7 @@ ion-item-divider{
     --background: transparent;
     width: 5rem;
     height: 2rem;
+}
+ion-chip > ion-select{
+    width: 100%;
 }
